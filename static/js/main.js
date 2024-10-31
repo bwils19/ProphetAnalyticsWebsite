@@ -17,29 +17,83 @@ function initializeNetworkVisualization() {
 
     const ctx = canvas.getContext('2d');
     const nodes = [];
-    const connections = [];
+    let animationFrameId;
 
-    // Set canvas size
-    function resizeCanvas() {
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Create nodes - increased from 12 to 20 points
-    for (let i = 0; i < 20; i++) {
-        nodes.push({
-            x: Math.random() * (canvas.width - 20) + 10,
-            y: Math.random() * (canvas.height - 20) + 10,
-            radius: Math.random() * 4 + 2, // Slightly smaller radius to accommodate more points
-            dx: (Math.random() - 0.5) * 0.8, // Slightly slower movement
-            dy: (Math.random() - 0.5) * 0.8
+    // Initial node setup
+    function initializeNodes() {
+        nodes.length = 0;
+        for (let i = 0; i < 20; i++) {
+            nodes.push({
+                x: Math.random() * (canvas.width - 20) + 10,
+                y: Math.random() * (canvas.height - 20) + 10,
+                radius: Math.random() * 4 + 2,
+                dx: (Math.random() - 0.5) * 0.8,
+                dy: (Math.random() - 0.5) * 0.8,
+                xPercent: 0, // Store position as percentage
+                yPercent: 0
+            });
+        }
+        // Calculate initial percentages
+        nodes.forEach(node => {
+            node.xPercent = node.x / canvas.width;
+            node.yPercent = node.y / canvas.height;
         });
     }
 
-    // Animation loop
+    function resizeCanvas() {
+        const container = canvas.parentElement;
+        if (container && window.getComputedStyle(container).display !== 'none') {
+            const oldWidth = canvas.width;
+            const oldHeight = canvas.height;
+
+            canvas.width = container.offsetWidth;
+            canvas.height = container.offsetHeight;
+
+            // If nodes exist, adjust their positions based on percentages
+            if (nodes.length > 0) {
+                nodes.forEach(node => {
+                    // Update positions based on stored percentages
+                    node.x = node.xPercent * canvas.width;
+                    node.y = node.yPercent * canvas.height;
+                });
+            } else {
+                initializeNodes();
+            }
+        }
+    }
+
+    // Initial setup
+    resizeCanvas();
+    initializeNodes();
+
+    function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+    // Observe resize with ResizeObserver
+    const resizeObserver = new ResizeObserver(
+        debounce(() => {
+            requestAnimationFrame(resizeCanvas);
+        }, 16) // Approximately 1 frame at 60fps
+    );
+
+    resizeObserver.observe(canvas.parentElement);
+
     function animate() {
+        const container = canvas.parentElement;
+        if (!container || window.getComputedStyle(container).display === 'none') {
+            requestAnimationFrame(animate);
+            return;
+        }
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Update and draw nodes
@@ -58,6 +112,10 @@ function initializeNetworkVisualization() {
                 node.y = Math.max(padding, Math.min(canvas.height - padding, node.y));
             }
 
+            // Update percentages
+            node.xPercent = node.x / canvas.width;
+            node.yPercent = node.y / canvas.height;
+
             // Draw node
             ctx.beginPath();
             ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
@@ -65,22 +123,21 @@ function initializeNetworkVisualization() {
             ctx.fill();
         });
 
-        // Draw connections between all nodes
+        // Draw connections
         nodes.forEach((node, i) => {
             nodes.slice(i + 1).forEach(other => {
                 const dx = other.x - node.x;
                 const dy = other.y - node.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
-                // Always draw connections, but fade them based on distance
-                const maxDistance = Math.max(canvas.width, canvas.height) * 0.8; // Increased slightly
+                const maxDistance = Math.max(canvas.width, canvas.height) * 0.8;
                 const opacity = 1 - (distance / maxDistance);
                 if (opacity > 0) {
                     ctx.beginPath();
                     ctx.moveTo(node.x, node.y);
                     ctx.lineTo(other.x, other.y);
-                    ctx.strokeStyle = `rgba(61, 79, 107, ${opacity * 0.4})`; // Slightly more transparent
-                    ctx.lineWidth = 0.8; // Slightly thinner lines to reduce visual clutter
+                    ctx.strokeStyle = `rgba(61, 79, 107, ${opacity * 0.4})`;
+                    ctx.lineWidth = 0.8;
                     ctx.stroke();
                 }
             });

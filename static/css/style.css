@@ -11,59 +11,71 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: rgba(245, 245, 245, 0.93)
+    background-color: rgba(245, 245, 245, 0.93);
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
+/* Header and Navigation */
 header {
     background: var(--background-color);
     padding: 1rem 2rem;
     box-shadow: 0 .5px 1px rgba(0,0,0,0.1);
+    transition: padding 0.3s ease;
 }
 
 nav {
+    width: 90%;
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: width 0.3s ease, padding 0.3s ease;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    margin-right: 2rem;  /* Add space between logo and nav items */
+    margin-right: 2rem;
+    min-width: 200px;
+    transition: all 0.3s ease;
 }
 
 .logo img {
+    min-height: 40px;
     max-height: 50px;
     width: auto;
+    transition: all 0.3s ease;
 }
 
-/* This is the key change - make the nav-container take full width */
 .nav-container {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* This spreads the main-nav and auth-nav apart */
+    justify-content: space-between;
     width: 100%;
+    transition: all 0.3s ease;
 }
 
 .main-nav {
     display: flex;
-    gap: 1.5rem;  /* Reduced gap between items */
+    gap: 1.5rem;
     list-style: none;
-    margin-right: auto; /* This pushes auth-nav to the right */
+    margin-right: auto;
+    transition: all 0.3s ease;
 }
 
 .auth-nav {
     display: flex;
     gap: 1rem;
     list-style: none;
+    transition: all 0.3s ease;
 }
 
 .main-nav a {
@@ -72,13 +84,14 @@ nav {
     font-weight: 500;
     padding: 0.5rem 0;
     transition: color 0.3s ease;
-    font-size: 0.9rem; /* Slightly smaller font size for main nav items */
+    font-size: 0.9rem;
 }
 
 .main-nav a:hover {
     color: var(--primary-color);
 }
 
+/* Buttons */
 .login-btn {
     color: var(--primary-color);
     text-decoration: none;
@@ -100,46 +113,35 @@ nav {
     padding: 0.5rem 1.5rem;
     border-radius: 4px;
     transition: background-color 0.3s ease;
+    white-space: nowrap;
 }
 
 .contact-btn:hover {
     background-color: var(--secondary-color);
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .main-nav {
-        gap: 1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .nav-container {
-        display: none; /* Add mobile menu functionality */
-    }
-
-    /* Add hamburger menu styles here */
-}
-
+/* Hero Section */
 .hero {
-    padding: 3rem 0 3rem 1rem;
+    padding: 3rem 2rem;
     background: linear-gradient(to right, #f8f9fa, #ffffff);
     position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .hero-container {
+    width: 90%;
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 4rem;
-    padding-right: 0;
+    transition: all 0.3s ease;
 }
 
 .hero-content {
     flex: 1;
-    margin: -1rem 0 0 0;
 }
 
 .hero-title {
@@ -147,40 +149,180 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem; /* adjusted gap between headings */
-    margin-left: -7rem;
+    gap: 1rem;
 }
 
-.main-heading {
-    font-size: 4.8rem;
+.main-heading, .sub-heading {
+    font-family: 'General Sans', sans-serif;
     font-weight: 400;
     color: #3d4f6b;
     text-align: left;
-    line-height: 1.1; /* Added line height */
-    margin-bottom: 0; /* Removed negative margin */
-}
-
-.sub-heading {
-    font-size: 4.8rem;
-    font-weight: 400;
-    color: #3D4F6BFF;
-    text-align: left;
-    line-height: 1.1; /* Added line height */
+    line-height: 1.1;
 }
 
 .hero-visualization {
-    flex: 2; /* Changed from 1 to 1.5 to make it wider */
-    max-width: 800px; /* Increased from 600px */
-    min-width: 500px; /* Increased from 400px */
+    flex: 2;
+    width: 100%;
+    max-width: 800px;
     height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: -6rem;
+    transition: width 0.3s ease, height 0.3s ease;
 }
 
 .hero-visualization canvas {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     background: transparent;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+/* Media Queries */
+@media (min-width: 1400px) {
+    .main-heading, .sub-heading {
+        font-size: 4.8rem;
+    }
+}
+
+@media (max-width: 1399px) {
+    .main-heading, .sub-heading {
+        font-size: 4rem;
+    }
+
+    .hero-visualization {
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .main-nav li:not(:last-child) {
+        display: none; /* Hide all nav items except the last one */
+    }
+
+    .auth-nav {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .main-heading, .sub-heading {
+        font-size: 3.5rem;
+    }
+
+    .hero-visualization {
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .hero-visualization {
+        display: none;
+        width: 0;
+        height: 0;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out, width 0s ease 0.3s, height 0s ease 0.3s;
+
+    }
+
+    .hero-content {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero-title {
+        align-items: center;
+    }
+}
+
+@media (min-width: 993px) {
+    .hero-visualization {
+        display: flex;
+        width: 100%;
+        height: 500px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    nav {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .logo {
+        margin-right: 1rem;
+        min-width: 150px; /* Slightly smaller on mobile but still visible */
+    }
+
+    /* Hide main navigation */
+    .main-nav {
+        display: none;
+    }
+
+    /* Keep auth buttons visible */
+    .auth-nav {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    /* Adjust auth buttons for mobile */
+    .login-btn, .contact-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        padding: 2rem 1rem;
+    }
+
+    .main-heading, .sub-heading {
+        font-size: 2.5rem;
+    }
+
+    .hero-visualization {
+        height: 250px;
+    }
+
+    .logo img {
+        max-height: 40px;
+    }
+    .logo {
+        min-width: 120px; /* Even smaller but still maintained */
+    }
+
+    /* Further compress auth buttons if needed */
+    .auth-nav {
+        gap: 0.3rem;
+    }
+
+    .login-btn, .contact-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    /* Style for mobile menu when active */
+    .mobile-menu-active .main-nav {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--background-color);
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
 }
