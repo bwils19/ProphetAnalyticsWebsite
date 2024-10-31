@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Prophet Analytics</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="static/css/reset.css">
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=General+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header (Same as main page) -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="static/images/PA_LOGO_20241023_v4.jpg" alt="Prophet Analytics Logo">
+            </div>
+            <div class="nav-container">
+                <ul class="main-nav">
+                    <li><a href="/why-prophet">Why Prophet Analytics</a></li>
+                    <li><a href="/product">Product</a></li>
+                    <li><a href="/solutions">Solutions</a></li>
+                    <li><a href="/resources">Resources</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+                <ul class="auth-nav">
+                    <li><a href="/login" class="login-btn">Login</a></li>
+                    <li><a href="/contact" class="contact-btn">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-content">
+                <h1>We'd love to hear from you</h1>
+                <p>Fill out the form and a Prophet Analytics team member will reach out</p>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">* First Name</label>
+                            <input type="text" id="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">* Last Name</label>
+                            <input type="text" id="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="company">* Company</label>
+                            <input type="text" id="company" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">* Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="country">* Country</label>
+                            <select id="country" required>
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                                <!-- Add more countries as needed -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone">
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="message">* Message</label>
+                        <textarea id="message" rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="updates">
+                        <label for="updates">Keep me informed with occasional updates about Prophet Analytics</label>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+
+            <div class="contact-sidebar">
+                <h2>Need help with something specific?</h2>
+
+                <div class="help-links">
+                    <a href="#" class="help-link">
+                        <h3>Help Center</h3>
+                        <p>Get support for technical issues</p>
+                    </a>
+
+                    <a href="#" class="help-link">
+                        <h3>Documentation</h3>
+                        <p>Read technical documentation for Prophet Analytics</p>
+                    </a>
+
+                    <a href="#" class="help-link">
+                        <h3>Office Locations</h3>
+                        <p>See all our office locations worldwide</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="static/js/main.js"></script>
+</body>
+</html>
