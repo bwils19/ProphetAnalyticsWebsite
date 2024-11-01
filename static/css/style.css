@@ -48,11 +48,21 @@ nav {
     transition: all 0.3s ease;
 }
 
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
 .logo img {
     min-height: 40px;
     max-height: 50px;
     width: auto;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, opacity 0.3s ease;
+}
+
+.logo a:hover img {
+    opacity: 0.9;
 }
 
 .nav-container {
