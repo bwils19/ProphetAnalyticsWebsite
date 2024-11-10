@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <header class="site-header">
                 <nav class="main-navigation">
                     <div class="logo">
-                        <a href="#" onclick="return false;">
+                        <a href="index.html">
                             <img src="static/images/PA_LOGO_20241023_v4.jpg" alt="Prophet Analytics Logo">
                         </a>
                     </div>
