@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <nav class="main-navigation">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="static/images/PA_LOGO_20241023_v4.jpg" alt="Prophet Analytics Logo">
+                            <img src="static/images/PA_LOGO_20250101_v1.svg" alt="Prophet Analytics Logo">
                         </a>
                     </div>
                     <div class="nav-container">
